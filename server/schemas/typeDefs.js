@@ -6,7 +6,7 @@ const typeDefs = gql`
     authors: [String]
     description: String
     title: String
-    image: Image
+    image: String
     link: String
     }
 
@@ -24,7 +24,7 @@ const typeDefs = gql`
     description: String
     title: String
     # testing image, may need to be different data type
-    image: Image
+    image: String
     link: String
   }
 
