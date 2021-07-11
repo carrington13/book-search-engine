@@ -14,7 +14,6 @@
 ## Installation
 Use `npm install` in root directory to install all dependencies.
 
-
 ## Usage
 
 ### Run Command
