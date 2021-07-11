@@ -10,6 +10,12 @@
 
 ## Deployed Heroku URL
 
+[Heroku App](https://rocky-wildwood-44083.herokuapp.com/)
+
+## Github Repo URL
+[GitHub](https://github.com/carrington13/book-search-engine/)
+
+
 
 ## Installation
 Use `npm install` in root directory to install all dependencies.
