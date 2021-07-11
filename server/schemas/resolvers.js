@@ -1,4 +1,4 @@
-const { AuthenicationError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -13,7 +13,7 @@ const resolvers = {
                 return userData;
             }
             // if not logged in(!context.user)
-            throw new AuthenicationError('Not logged in');
+            throw new AuthenticationError('Not logged in');
         }
     },
 
@@ -22,13 +22,13 @@ const resolvers = {
             const user = await User.findOne({ email });
             // If email findOne fails, throw ambiguous error
             if (!user) {
-                throw new AuthenicationError('Incorrect credentials');
+                throw new AuthenticationError('Incorrect credentials');
             }
 
             const correctPw = await user.isCorrectPassword(password);
             // If password fails, throw same ambiguous error
             if (!correctPw) {
-                throw new AuthenicationError('Incorrect credentials');
+                throw new AuthenticationError('Incorrect credentials');
             }
             
             // if user && correctPw pass if conditionals, create a JWT
@@ -45,7 +45,7 @@ const resolvers = {
         },
         saveBook: async (_, args, context) => {
             if(context.user) {
-                const updateUser = await User.findOneAndUpdate(
+                const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: args } },
                     { new: true }
@@ -54,7 +54,7 @@ const resolvers = {
                 return updatedUser;
             }
             // if context doesnt exist....
-            throw new AuthenicationError('You need to be logged in!');
+            throw new AuthenticationError('You need to be logged in!');
         },
         removeBook: async (_, { bookId }, context) => {
             if (context.user) {
@@ -67,7 +67,7 @@ const resolvers = {
                 return updatedUser;
             }
             // if context(user) doesnt exist...
-            throw new AuthenicationError('You need to be logged in!');
+            throw new AuthenticationError('You need to be logged in!');
 
         }
 
